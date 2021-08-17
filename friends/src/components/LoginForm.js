@@ -1,14 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
-import axiosWithAuth from '../utils/axiosWithAuth'
+import axios from 'axios'
 
 const initialState = {
     username: "lambda",
     password: "school",
 }
 
+const isLoadingState = {
+    loading: false,
+}
+
 const LoginForm = (props) => {
     const [ credentials, setCredentials ] = useState(initialState);
+    const [ isLoading, setLoading ] = useState(isLoadingState);
 
     const handleChange = event => {
         setCredentials({
@@ -20,10 +25,9 @@ const LoginForm = (props) => {
     const login = event => {
         event.preventDefault();
     
-        axiosWithAuth().post('login/endpoint', credentials)
+        axios.post('http://localhost:5000/api/login', credentials)
             .then(response => {
-                console.log(response)
-                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('token', response.data.payload);
                 props.history.push('/protected')
             })
             .catch(error => {

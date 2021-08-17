@@ -27,7 +27,7 @@ function App() {
           <li>
             {localStorage.getItem("token") && 
               <div>
-                <Link to="/protected">Protected Page</Link>
+                <Link to="/protected">Friends</Link>
               </div>
             }
           </li>
@@ -35,8 +35,9 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/protected" component={Friends} />
           <PrivateRoute path="/logout" component={Logout} />
-          <Route path = "/friendform" component = {FriendForm} />
+          <PrivateRoute path = "/friendform" component = {FriendForm} />
           <Route path = "/login" component = {LoginForm} />
+          <Route path="/" component={LoginForm} />
         </Switch>
       </div>
     </Router>

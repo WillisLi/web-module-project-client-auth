@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialState = {
+    id: Date.now(),
     name: "",
     age: 0,
     email: "",
@@ -20,7 +21,7 @@ const FriendForm = () => {
     const submit = event => {
         event.preventDefault();
     
-        axiosWithAuth().post('submit/endpoint', friendValues)
+        axiosWithAuth().post('submit/', friendValues)
             .then(response => {
                 console.log(response)
                 localStorage.setItem('token', response.data.token);
