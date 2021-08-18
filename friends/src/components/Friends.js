@@ -1,6 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import axiosWithAuth from '../utils/axiosWithAuth'
-import FriendForm from './FriendForm';
+import styled from 'styled-components'
+
+const Friend = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15vw;
+    border: 1px solid black;
+    margin: 0.5% 0%;
+`
+
+const FriendsLists = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 
 const initialState = {
     friends: [],
@@ -24,53 +39,17 @@ const Friends = () => {
     }, []); 
 
     return (
-        <div>
+        <FriendsLists>
             {friendsList.friends.map(friend => (
-                <div key = {friend.id}>
+                <Friend key = {friend.id}>
                     <h4>{friend.name}</h4>
                     <p>Age: {friend.age}</p>
                     <p>Email: {friend.email}</p>
-                </div>
+                </Friend>
                 )
             )}
-        </div>
+        </FriendsLists>
     );
 }
 
 export default Friends;
-
-//Class Component
-// class Friends extends React.Component {
-//     state = {
-//         friends: []
-//     };
-
-//     getData = () => {
-//         axiosWithAuth().get('/friends')
-//             .then(response => {
-//                 console.log(response.data)
-//                 this.setState({
-//                     friends: response.data
-//                 })
-//                 console.log(this.state.friends);
-//             })
-//             .catch(error => {
-//                 console.log(error);
-//             })
-//     }
-
-//     componentDidMount() {
-//         this.getData();
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 {this.state.friends.map(friend => (
-//                     <p>Name: {friend.name}</p>
-//                     )
-//                 )}
-//             </div>
-//         );
-//     }
-// }

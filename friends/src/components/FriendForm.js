@@ -7,7 +7,7 @@ const initialState = {
     email: "",
 }
 
-const FriendForm = () => {
+const FriendForm = (props) => {
     const [ friendValues, setFriendValues ] = useState(initialState);
 
     const handleChange = event => {
@@ -23,6 +23,7 @@ const FriendForm = () => {
         axiosWithAuth().post('friends/', friendValues)
             .then(response => {
                 console.log(response.data)
+                props.history.push('/protected')
             })
             .catch(error => {
                 console.log(error);
