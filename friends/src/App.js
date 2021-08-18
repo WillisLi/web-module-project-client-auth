@@ -11,27 +11,17 @@ function App() {
   return (
     <Router>
       <div className="friendsApp">
-        <ul>
-          <li>
-            <Link to = "/login">Login</Link>
-          </li>
-
-          <li>
-            <Link to="/friendform">Add Friend</Link>
-          </li>
-
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
-
-          <li>
-            {localStorage.getItem("token") && 
+        <div className = "links">
+          <Link to = "/login">Login</Link>
+          <Link to="/friendform">Add Friend</Link>
+          {localStorage.getItem("token") && 
               <div>
                 <Link to="/protected">Friends</Link>
               </div>
-            }
-          </li>
-        </ul>
+          }
+          <Link to="/logout">Logout</Link>
+        </div>
+
         <Switch>
           <PrivateRoute exact path="/protected" component={Friends} />
           <PrivateRoute path="/logout" component={Logout} />
